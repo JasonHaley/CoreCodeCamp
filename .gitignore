@@ -173,3 +173,5 @@ $RECYCLE.BIN/
 
 *.ide
 
+# Don't commit local dev appsettings
+appsettings.[Ll]ocal.json

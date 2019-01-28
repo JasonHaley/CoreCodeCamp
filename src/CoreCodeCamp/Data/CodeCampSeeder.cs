@@ -41,27 +41,27 @@ namespace CoreCodeCamp.Data
     {
       try
       {
-        if (_env.IsDevelopment() && _config["Data:IterateDatabase"].ToLower() == "true")
+        if (_env.IsDevelopment() && _config["Data-IterateDatabase"].ToLower() == "true")
         {
           await _ctx.Database.EnsureDeletedAsync();
           await _ctx.Database.EnsureCreatedAsync();
         }
 
-        var admin = await _userManager.FindByEmailAsync(_config["Admin:SuperUser:Email"]);
+        var admin = await _userManager.FindByEmailAsync(_config["Admin-SuperUser-Email"]);
 
         // If no Admin, then we haven't seeded the database
         if (admin == null)
         {
           admin = new CodeCampUser()
           {
-            UserName = _config["Admin:SuperUser:Email"],
-            Email = _config["Admin:SuperUser:Email"],
-            Name = _config["Admin:SuperUser:Name"],
+            UserName = _config["Admin-SuperUser-Email"],
+            Email = _config["Admin-SuperUser-Email"],
+            Name = _config["Admin-SuperUser-Name"],
             EmailConfirmed = true
           };
 
           // Create Super User
-          if (!(await _userManager.CreateAsync(admin, _config["Admin:SuperUser:TempPassword"])).Succeeded)
+          if (!(await _userManager.CreateAsync(admin, _config["Admin-SuperUser-TempPassword"])).Succeeded)
           {
             throw new InvalidOperationException("Failed to create Super User");
           }

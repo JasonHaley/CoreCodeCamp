@@ -36,9 +36,9 @@ namespace CoreCodeCamp.Services
     {
       try
       {
-        var key = _config["MailService:ApiKey"];
+        var key = _config["MailService-ApiKey"];
         var client = new SendGridClient(key);
-        var mail = MailHelper.CreateSingleEmail(new EmailAddress(_config["MailService:FromEmail"]),
+        var mail = MailHelper.CreateSingleEmail(new EmailAddress(_config["MailService-FromEmail"]),
           new EmailAddress(email),
           subject,
           "",

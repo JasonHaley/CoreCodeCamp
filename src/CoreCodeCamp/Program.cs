@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CoreCodeCamp.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +12,12 @@ namespace CoreCodeCamp
     public static void Main(string[] args)
     {
       var host = WebHost.CreateDefaultBuilder(args)
+                   .ConfigureAppConfiguration((configApp) =>
+                   {
+                       configApp.AddJsonFile("appsettings.json", optional: false);
+                       //configApp.AddJsonFile("appsettings.local.json", optional: true);
+                       configApp.AddAzureKeyVault("https://bostongab-kv.vault.azure.net");
+                   })
                    .UseStartup<Startup>()
                    .Build();
 
